@@ -1,1 +1,5 @@
 # The underappreciated diversity of bile acid modifications
+# Figure_1: Stage 1 MassQL query and distribution patterns of delta masses
+Scripts developed for generating Figure_1d (python) and Figure_1e (R) are available in this folder along with the source data tables needed as input. This figure highlights the generation of Stage 1 MassQL query, caluculation of delta masses and the sunsequent visualization of their distribution based on the class of bile acids (non-, mono-, di-, tri-, tetra-, pentahydroxy). 
+#Figure_2: Distributions of delta masses obtained from fastMASST searches
+Scripts for generating Figure 2a,2b,2c,2d (python) are available with the source data tables. The input tables are obtained after searching for similar spectra of MassQL MS/MS output using fastMASST. This figure demonstrates the distribution of unique delta masses across different body parts in rodents and humans. Using UpSet plots we also highlight delta masses that are present in multiple bile acid classes. 
