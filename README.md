@@ -10,6 +10,8 @@ Scripts for generating Figure_3c,3d,3e (R) are available with the respective inp
 Script for generating the heatmap in Figure_4b is provided along with the input table obtained from fastMASST search of spectral matches based on health condiiton. Peak areas for Figure_4c are based on manual integration using Skyline of diet samples in carnivores, omnivores and herbivores. Script for generating the box plots in Figure_4c is provided and also the table with the peak area. 
 # Figure_5: Validation of polyamine bile amidates using synthetic standards
 Extracted ion chromatograms (EICs) for the polyamine bile amidates used for the retention time matching plots is provided. An excel file with the USI links for each of the MS/MS spectrum of polyamine bile amidates is also provided. 
+# Step_by_step_guide
+This step_by_step quide provides screenshots of the workflow on GNPS to add the bile acid MS/MS library and start a molecular networking job. 
 # Supplementary_Figures
 Scripts and source data for generating supplementary figures are provided here.
 # Supplementary_Data
