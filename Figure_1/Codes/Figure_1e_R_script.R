@@ -12,7 +12,7 @@ library(gplots)
 library(dplyr)
 
 #Loading the input file (available in the source data)
-dfnon<-read.csv("Figure_1e_Non_Refined_counts_morethan2.csv", check.names = FALSE)
+dfnon<-read.csv("Figure_1e_Non_Refined_counts_morethan2_extracted.csv", check.names = FALSE)
 
 #reshaping the dataframe from long to wide format
 dfnon_wide <- reshape(dfnon, idvar = "delta", timevar = "Bile", direction = "wide")
