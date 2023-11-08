@@ -92,3 +92,22 @@ df %>% ggboxplot(x = "ATTRIBUTE_diet", y = "Di_acetyl_cad_area", color = "ATTRIB
   stat_compare_means(comparisons = comp, method = "wilcox")
 dev.off()
 
+#Di-taurine
+kruskal.test(ATTRIBUTE_diet ~ Di_tau_area, data = df)
+pairwise.wilcox.test(df$Di_tau_area, df$ATTRIBUTE_diet, p.adjust.method = "BH")
+comp <- list( c("Herbivore", "Omnivore"), c("Herbivore", "Carnivore"), c("Omnivore", "Carnivore") )
+svg("skyline/11082023_Di_taurine_polyamines_diet_stats.svg")
+df %>% ggboxplot(x = "ATTRIBUTE_diet", y = "Di_tau_area", color = "ATTRIBUTE_diet", palette = c("#ECA869", "#B08BBB", "#B5D5C5"), xlab = "Dihydroxy_taurine", ylab = "Peak area", outlier.shape = NA, add = "jitter", add.params = list(color = "ATTRIBUTE_diet", size = 3), order = order) +
+  stat_compare_means(comparisons = comp, method = "wilcox")
+dev.off()
+
+#Di-glycine
+kruskal.test(ATTRIBUTE_diet ~ Di_gly_area, data = df)
+pairwise.wilcox.test(df$Di_gly_area, df$ATTRIBUTE_diet, p.adjust.method = "BH")
+comp <- list( c("Herbivore", "Omnivore"), c("Herbivore", "Carnivore"), c("Omnivore", "Carnivore") )
+svg("skyline/11082023_Di_glycine_polyamines_diet_stats.svg")
+df %>% ggboxplot(x = "ATTRIBUTE_diet", y = "Di_gly_area", color = "ATTRIBUTE_diet", palette = c("#ECA869", "#B08BBB", "#B5D5C5"), xlab = "Dihydroxy_glycine", ylab = "Peak area", outlier.shape = NA, add = "jitter", add.params = list(color = "ATTRIBUTE_diet", size = 3), order = order) +
+  stat_compare_means(comparisons = comp, method = "wilcox")
+dev.off()
+
+
