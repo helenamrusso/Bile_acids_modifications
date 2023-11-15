@@ -1,6 +1,6 @@
 ############################################
 ############################################
-####SCRIPT FOR HEATMAP FIGURE 1e############
+####SCRIPT FOR HEATMAP FIGURE 1d############
 ############################################
 ############################################
 
@@ -55,3 +55,61 @@ svg("delta1_nonrefined_heatmap_log.svg")
 pheatmap(matdf1,cluster_cols = F, cluster_rows = F, fontsize_row = 2, fontsize_col = 2, cellwidth = 25, cellheight = 0.08, color=viridis(100))
 dev.off()
 
+#############################################
+####SCRIPT FOR HEATMAP FIGURE 1d ZOOM########
+#############################################
+
+setwd("C:/Users/imoha/OneDrive - University of California, San Diego Health/2023_Bile_Acid/Heatmaps_Fig1")
+library(colorspace)
+library(vegan)
+library(gplots)
+library(dplyr)
+
+dfnon<-read.csv("Non_Refined_counts_morethan2_extract.csv", check.names = FALSE)
+dfnon_subset <- dfnon[dfnon$delta < 120, ] #subset for deltas less than 120
+dfnon_subset <- subset(dfnon_subset, !is.na(delta) & delta != 0) #remove NAs and deltas that are 0
+dfnon_subset <- dfnon_subset[dfnon_subset$delta > 50, ] #subset for deltas more than 50
+
+#reshape from long to wide
+dfnon_subset_wide <- reshape(dfnon_subset, idvar = "delta", timevar = "Bile", direction = "wide")
+dfnon_subset_wide[is.na(dfnon_subset_wide)] <- 0
+dfnon_subset_wide_1<-dfnon_subset_wide[order(dfnon_subset_wide$delta),]
+dfnon_subset_wide_1<-dfnon_subset_wide_1[,c(1,7,5,3,2,4,6)]
+
+#rounding the deltas to 1 decimal places
+dfnon_subset_wide_1$round_delta1<-round(dfnon_subset_wide_1$delta, digits = 1)
+df_delta1<-dfnon_subset_wide_1[,-c(9)]
+
+#grouping by deltas and sum over all the counts in non to pentahydroxy columns
+df_delta1_grp <- df_delta1 %>%
+  group_by(round_delta1) %>%
+  summarise(across(everything(), sum))
+df_delta1_grp<-df_delta1_grp[,-c(2)]
+
+#applying log and storing in a new dataframe 
+df_delta1_final_log<-df_delta1_grp
+df_delta1_final_log[,2:7] <- log10(df_delta1_final_log[2:7] + 1)
+df_delta1_final_log2 <- df_delta1_final_log[order(df_delta1_final_log$round_delta1),]
+
+#heatmap for transpose
+#transposing the big feature table
+t_df_delta1_final_log2<-t(df_delta1_final_log2)
+t_df_delta1_final_log2<-as.data.frame(t_df_delta1_final_log2)
+
+#making the first row as the column names
+col_names <- as.character(unlist(t_df_delta1_final_log2[1, ]))
+t_df_delta1_final_log2 <- t_df_delta1_final_log2[-1, ]
+colnames(t_df_delta1_final_log2) <- col_names
+
+#making the rownames as the first column and calling the header as mid
+library(tibble)
+t_df_delta1_final_log2 <- rownames_to_column(t_df_delta1_final_log2, var = "mid")
+
+rnamest <- t_df_delta1_final_log2[,1, drop = TRUE]
+matdft <- data.matrix(t_df_delta1_final_log2[,2:272])
+rownames(matdft) <- rnamest
+library(pheatmap)
+svg("delta1_nonrefined_heatmap_zoom_log.svg")
+library(viridis)
+pheatmap(matdft,cluster_cols = F, cluster_rows = F, fontsize_row = 0.1, fontsize_col = 8, cellwidth = 3, cellheight = 25, color=viridis(100))
+dev.off()
