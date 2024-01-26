@@ -12,9 +12,11 @@ Script for generating the heatmap in Figure_4b is provided along with the input 
 Extracted ion chromatograms (EICs) for the polyamine bile amidates used for the retention time matching plots is provided. An excel file with the USI links for each of the MS/MS spectrum of polyamine bile amidates is also provided. 
 # Step_by_step_guide
 This step_by_step quide provides screenshots of the workflow on GNPS to add the bile acid MS/MS library and start a molecular networking job. 
-# Supplementary_Figures
+# Supplementary_figures
 Scripts and source data for generating supplementary figures are provided here.
-# Supplementary_Data
+# Supplementary_tables
+Supporting tables for main figures are provided here.
+# Supplementary_data
 Supplementary data to support results in the main text of the manuscript is provided here for inspection.
 # Contact
 For more information and questions regarding scripts please reach out to hmannochiorusso@health.ucsd.edu and ipmohanty@health.ucsd.edu
